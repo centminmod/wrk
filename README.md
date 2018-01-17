@@ -55,8 +55,8 @@ This forked versions adds [source IP binding](https://github.com/wg/wrk/pull/262
 
 The -b (or --bind-ip) command line option can accept either single IP address, or CIDR mask, e.g.:
 
-  wrk -b 127.0.0.2 http://localhost/
-  wrk -b 127.0.0.1/28 http://localhost/
+    wrk -b 127.0.0.2 http://localhost/
+    wrk -b 127.0.0.1/28 http://localhost/
 
 In addition, the IP_BIND_ADDRESS_NO_PORT socket option is being used on supported systems (Linux >= 4.2, glibc >= 2.23) in order to get even more concurrent connections due to an ability to share source port (see [1](https://kernelnewbies.org/Linux_4.2#head-8ccffc90738ffcb0c20caa96bae6799694b8ba3a), [2](https://git.kernel.org/torvalds/c/90c337da1524863838658078ec34241f45d8394d)).
 
