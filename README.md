@@ -160,6 +160,63 @@ JSON Output
 }
 ```
 
+## Examples
+
+Combining `--breakout`, `--latency` and `-s scripts/json.lua` forked additions
+
+```
+wrk -t2 -c200 -d30s --breakout --latency -s scripts/json.lua http://localhost 
+Running 30s test @ http://localhost
+  2 threads and 200 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     0.88ms  750.97us  21.61ms   71.06%
+    Connect    54.91us  112.79us   1.58ms   97.51%
+    TTFB        0.88ms  751.07us  21.60ms   71.06%
+    TTLB        0.93us    0.46us 786.00us   89.81%
+    Req/Sec   128.02k     7.83k  149.03k    84.33%
+  Latency Distribution
+     50%  687.00us
+     75%    1.27ms
+     90%    1.97ms
+     99%    2.99ms
+  7641549 requests in 30.00s, 29.24GB read
+Requests/sec: 254708.86
+Transfer/sec:      0.97GB
+
+JSON Output
+-----------
+
+{
+        "requests": 7641549,
+        "duration_in_microseconds": 30001112.00,
+        "bytes": 31391407292,
+        "requests_per_sec": 254708.86,
+        "bytes_transfer_per_sec": 1046341458.68,
+        "latency_distribution": [
+                {
+                        "percentile": 50,
+                        "latency_in_microseconds": 687
+                },
+                {
+                        "percentile": 75,
+                        "latency_in_microseconds": 1273
+                },
+                {
+                        "percentile": 90,
+                        "latency_in_microseconds": 1968
+                },
+                {
+                        "percentile": 99,
+                        "latency_in_microseconds": 2993
+                },
+                {
+                        "percentile": 99.999,
+                        "latency_in_microseconds": 12450
+                }
+        ]
+}
+```
+
 ## Benchmarking Tips
 
   The machine running wrk must have a sufficient number of ephemeral ports
