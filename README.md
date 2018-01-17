@@ -49,7 +49,7 @@ Usage: wrk <options> <url>
     Requests/sec: 748868.53
     Transfer/sec:    606.33MB
 
-## Bind Source Port
+## Bind Source IP
 
 This forked versions adds [source IP binding](https://github.com/wg/wrk/pull/262) support.
 
