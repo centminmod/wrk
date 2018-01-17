@@ -8,6 +8,22 @@
   processing, and custom reporting. Details are available in SCRIPTING and
   several examples are located in [scripts/](scripts/).
 
+## Install
+
+Installing wrk forked version as a separate command `wrk-cmm` side by side with existing `wrk` binary:
+
+    git clone -b centminmod https://github.com/centminmod/wrk wrk-cmm
+    cd wrk-cmm
+    make
+    \cp -af wrk /usr/local/bin/wrk-cmm
+
+Installing wrk forked version as `wrk` binary (will overwrite existing `/usr/local/bin/wrk` binary if installed):
+
+    git clone -b centminmod https://github.com/centminmod/wrk wrk-cmm
+    cd wrk-cmm
+    make
+    \cp -af wrk /usr/local/bin/wrk
+
 ## Command Line Options
 
 ```
