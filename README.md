@@ -8,6 +8,29 @@
   processing, and custom reporting. Details are available in SCRIPTING and
   several examples are located in [scripts/](scripts/).
 
+## Commands
+
+```
+wrk
+Usage: wrk <options> <url>                            
+  Options:                                            
+    -c, --connections <N>  Connections to keep open   
+    -d, --duration    <T>  Duration of test           
+    -t, --threads     <N>  Number of threads to use   
+                                                      
+    -b, --bind-ip     <S>  Source IP (or CIDR mask)   
+                                                      
+    -s, --script      <S>  Load Lua script file       
+    -H, --header      <H>  Add header to request      
+        --latency          Print latency statistics   
+        --breakout         Print breakout statistics  
+        --timeout     <T>  Socket/request timeout     
+    -v, --version          Print version details      
+                                                      
+  Numeric arguments may include a SI unit (1k, 1M, 1G)
+  Time arguments may include a time unit (2s, 2m, 2h)
+```
+
 ## Basic Usage
 
     wrk -t12 -c400 -d30s http://127.0.0.1:8080/index.html
@@ -25,6 +48,19 @@
       22464657 requests in 30.00s, 17.76GB read
     Requests/sec: 748868.53
     Transfer/sec:    606.33MB
+
+## Bind Source Port
+
+This forked versions adds [source IP binding](https://github.com/wg/wrk/pull/262) support.
+
+The -b (or --bind-ip) command line option can accept either single IP address, or CIDR mask, e.g.:
+
+  wrk -b 127.0.0.2 http://localhost/
+  wrk -b 127.0.0.1/28 http://localhost/
+
+In addition, the IP_BIND_ADDRESS_NO_PORT socket option is being used on supported systems (Linux >= 4.2, glibc >= 2.23) in order to get even more concurrent connections due to an ability to share source port (see [1](https://kernelnewbies.org/Linux_4.2#head-8ccffc90738ffcb0c20caa96bae6799694b8ba3a), [2](https://git.kernel.org/torvalds/c/90c337da1524863838658078ec34241f45d8394d)).
+
+Also, EADDRNOTAVAIL from connect() is now treated as a critical error, leading wrk to quit immediately.
 
 ## Breakout Statistics
 
