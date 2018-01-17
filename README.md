@@ -8,7 +8,7 @@
   processing, and custom reporting. Details are available in SCRIPTING and
   several examples are located in [scripts/](scripts/).
 
-## Commands
+## Command Line Options
 
 ```
 wrk
@@ -143,26 +143,6 @@ JSON Output
         ]
 }
 ```
-
-## Command Line Options
-
-    -c, --connections: total number of HTTP connections to keep open with
-                       each thread handling N = connections/threads
-
-    -d, --duration:    duration of the test, e.g. 2s, 2m, 2h
-
-    -t, --threads:     total number of threads to use
-
-    -s, --script:      LuaJIT script, see SCRIPTING
-
-    -H, --header:      HTTP header to add to request, e.g. "User-Agent: wrk"
-
-        --latency:     print detailed latency statistics
-
-        --breakout:    print connect, time to first byte (TTFB) and time to last byte (TTLB) statistics
-
-        --timeout:     record a timeout if a response is not received within
-                       this amount of time.
 
 ## Benchmarking Tips
 
