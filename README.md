@@ -217,6 +217,10 @@ JSON Output
 }
 ```
 
+## Tutorials & Articles
+
+* https://www.digitalocean.com/community/tutorials/how-to-benchmark-http-latency-with-wrk-on-ubuntu-14-04
+
 ## Benchmarking Tips
 
   The machine running wrk must have a sufficient number of ephemeral ports
