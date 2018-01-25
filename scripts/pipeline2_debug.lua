@@ -1,5 +1,5 @@
 -- https://doc.networknt.com/tool/wrk-perf/
--- wrk -t2 -c10 -d10s -s scripts/pipeline2.lua http://localhost -- / 5
+-- wrk -t2 -c10 -d10s -s scripts/pipeline2_debug.lua http://localhost -- / 5
 -- https://github.com/networknt/microservices-framework-benchmark
 
 init = function(args)
@@ -15,4 +15,13 @@ end
 
 request = function()
    return req
+end
+
+response = function (status, headers, body)
+  io.write("------------------------------\n")
+  io.write("Response with status: ".. status .."\n")
+  io.write("------------------------------\n")
+
+  io.write("[response] Body:\n")
+  io.write(body .. "\n")
 end
