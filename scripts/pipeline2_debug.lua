@@ -1,6 +1,7 @@
 -- https://doc.networknt.com/tool/wrk-perf/
 -- wrk -t2 -c10 -d10s -s scripts/pipeline2_debug.lua http://localhost -- / 5
 -- https://github.com/networknt/microservices-framework-benchmark
+-- https://en.wikipedia.org/wiki/HTTP_pipelining
 
 init = function(args)
    request_uri = args[1]
