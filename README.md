@@ -28,7 +28,7 @@ Installing wrk forked version as `wrk` binary (will overwrite existing `/usr/loc
 
 ```
 wrk-cmm -v
-wrk 4.1.0-16-g8d0a45d [epoll] Copyright (C) 2012 Will Glozer
+wrk 4.1.0-21-gb4cff62 [epoll] Copyright (C) 2012 Will Glozer
 Usage: wrk <options> <url>                            
   Options:                                            
     -c, --connections <N>  Connections to keep open   
@@ -45,7 +45,7 @@ Usage: wrk <options> <url>
     -v, --version          Print version details      
                                                       
   Numeric arguments may include a SI unit (1k, 1M, 1G)
-  Time arguments may include a time unit (2s, 2m, 2h
+  Time arguments may include a time unit (2s, 2m, 2h)
 ```
 
 ## Basic Usage
