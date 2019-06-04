@@ -28,7 +28,7 @@ Installing wrk forked version as `wrk` binary (will overwrite existing `/usr/loc
 
 ```
 wrk-cmm -v
-wrk 4.1.0-21-gb4cff62 [epoll] Copyright (C) 2012 Will Glozer
+wrk 4.1.0-27-ged1ceb4 [epoll] Copyright (C) 2012 Will Glozer
 Usage: wrk <options> <url>                            
   Options:                                            
     -c, --connections <N>  Connections to keep open   
