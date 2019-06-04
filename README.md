@@ -8,7 +8,7 @@
   processing, and custom reporting. Details are available in SCRIPTING and
   several examples are located in [scripts/](scripts/).
 
-## Install
+## Install wrk Forked Version
 
 Installing wrk forked version as a separate command `wrk-cmm` side by side with existing `wrk` binary:
 
@@ -23,6 +23,8 @@ Installing wrk forked version as `wrk` binary (will overwrite existing `/usr/loc
     cd wrk-cmm
     make
     \cp -af wrk /usr/local/bin/wrk
+
+You can search wrk forked version code via https://sourcegraph.com/github.com/centminmod/wrk
 
 ## Command Line Options
 
