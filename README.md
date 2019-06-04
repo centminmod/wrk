@@ -24,7 +24,7 @@ Installing wrk forked version as `wrk` binary (will overwrite existing `/usr/loc
     make
     \cp -af wrk /usr/local/bin/wrk
 
-You can search wrk forked version code via https://sourcegraph.com/github.com/centminmod/wrk
+You can search wrk forked version code via https://sourcegraph.com/github.com/centminmod/wrk@centminmod
 
 ## Command Line Options
 
