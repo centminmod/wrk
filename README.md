@@ -163,6 +163,34 @@ JSON Output
 }
 ```
 
+## Multiple Paths
+
+`scripts/multplepaths.lua` from https://github.com/timotta/wrk-scripts allows yout to test a list of url paths in `paths.txt` text file you create with one url path per line.
+
+```
+wrk-cmm -t2 -c50 -d20s --latency --breakout -s scripts/multiplepaths.lua http://localhost
+multiplepaths: Found 2 paths
+multiplepaths: Found 2 paths
+multiplepaths: Found 2 paths
+Running 20s test @ http://localhost
+  2 threads and 50 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     5.83ms   25.29ms 260.85ms   96.40%
+    Connect   302.54us  129.08us 538.00us   60.00%
+    TTFB        5.82ms   25.30ms 260.84ms   96.40%
+    TTLB       11.41us   25.62us   8.94ms   99.90%
+    Req/Sec    39.53k     8.47k   48.10k    94.59%
+  Latency Distribution
+     50%  399.00us
+     75%  823.00us
+     90%    7.22ms
+     95%   11.02ms
+     99%  160.52ms
+  1539109 requests in 20.00s, 33.10GB read
+Requests/sec:  76947.77
+Transfer/sec:      1.66GB
+```
+
 ## Examples
 
 Combining `--breakout`, `--latency` and `-s scripts/json.lua` forked additions
