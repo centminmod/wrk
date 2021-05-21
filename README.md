@@ -30,7 +30,7 @@ You can search wrk forked version code via https://sourcegraph.com/github.com/ce
 
 ```
 wrk-cmm -v
-wrk 4.1.0-27-ged1ceb4 [epoll] Copyright (C) 2012 Will Glozer
+wrk 4.1.0-42-g08c17d7 [epoll] Copyright (C) 2012 Will Glozer
 Usage: wrk <options> <url>                            
   Options:                                            
     -c, --connections <N>  Connections to keep open   
@@ -42,6 +42,7 @@ Usage: wrk <options> <url>
     -s, --script      <S>  Load Lua script file       
     -H, --header      <H>  Add header to request      
         --latency          Print latency statistics   
+    -D  --delay-stats <T>  Stats collection delay     
         --breakout         Print breakout statistics  
         --timeout     <T>  Socket/request timeout     
     -v, --version          Print version details      
@@ -95,18 +96,19 @@ Example:
 
   Output:
 
-    wrk -t2 -c100 -d5s --breakout http://localhost                   
+    wrk -t2 -c100 -d5s --breakout http://localhost
     Running 5s test @ http://localhost
-    2 threads and 100 connections
-    Thread Stats   Avg      Stdev     Max   +/- Stdev
-      Latency   407.49us  284.92us   4.07ms   66.39%
-      Connect    52.79us   92.59us 773.00us   94.25%
-      TTFB      405.60us  285.11us   4.07ms   66.36%
-      TTLB        0.92us    0.34us  30.00us   89.43%
-      Req/Sec   125.99k     7.61k  141.40k    70.00%
-    1253135 requests in 5.00s, 4.79GB read
-    Requests/sec: 250593.32
-    Transfer/sec:      0.96GB
+      2 threads and 100 connections
+      Thread Stats   Avg     Stdev       Max       Min   +/- Stdev
+      Thread Stats   Avg      Stdev     Max   +/- Stdev
+        Latency     1.86ms    4.56ms   85.17ms   59.00us   93.61%
+        Connect   673.39us  307.47us    1.23ms  158.00us   59.00%
+        TTFB        1.85ms    4.56ms   85.17ms   56.00us   93.61%
+        TTLB        2.06us    3.08us    0.92ms    1.00us   99.86%
+        Req/Sec    63.17k     3.71k    70.95k    56.17k    59.00%
+      628391 requests in 5.00s, 2.40GB read
+    Requests/sec: 125642.59
+    Transfer/sec:    492.23MB
 
 ## json.lua
 
@@ -122,42 +124,43 @@ Example:
 wrk -t2 -c100 -d5s -s scripts/json.lua http://localhost                                
 Running 5s test @ http://localhost
   2 threads and 100 connections
+  Thread Stats   Avg     Stdev       Max       Min   +/- Stdev
   Thread Stats   Avg      Stdev     Max   +/- Stdev
-    Latency   392.43us  234.56us   3.17ms   63.90%
-    Req/Sec   126.95k     7.35k  138.96k    75.00%
-  1262082 requests in 5.00s, 4.83GB read
-Requests/sec: 252380.97
-Transfer/sec:      0.97GB
+    Latency     2.07ms    5.15ms   86.85ms   52.00us   93.37%
+    Req/Sec    63.37k     4.10k    71.18k    53.40k    62.00%
+  630256 requests in 5.00s, 2.41GB read
+Requests/sec: 126025.99
+Transfer/sec:    493.73MB
 
 JSON Output
 -----------
 
 {
-        "requests": 1262082,
-        "duration_in_microseconds": 5000702.00,
-        "bytes": 5184620456,
-        "requests_per_sec": 252380.97,
-        "bytes_transfer_per_sec": 1036778527.49,
+        "requests": 630256,
+        "duration_in_microseconds": 5001000.00,
+        "bytes": 2589091648,
+        "requests_per_sec": 126025.99,
+        "bytes_transfer_per_sec": 517714786.64,
         "latency_distribution": [
                 {
                         "percentile": 50,
-                        "latency_in_microseconds": 403
+                        "latency_in_microseconds": 599
                 },
                 {
                         "percentile": 75,
-                        "latency_in_microseconds": 545
+                        "latency_in_microseconds": 881
                 },
                 {
                         "percentile": 90,
-                        "latency_in_microseconds": 685
+                        "latency_in_microseconds": 4557
                 },
                 {
                         "percentile": 99,
-                        "latency_in_microseconds": 1011
+                        "latency_in_microseconds": 27366
                 },
                 {
                         "percentile": 99.999,
-                        "latency_in_microseconds": 2361
+                        "latency_in_microseconds": 84136
                 }
         ]
 }
@@ -199,50 +202,53 @@ Combining `--breakout`, `--latency` and `-s scripts/json.lua` forked additions
 wrk -t2 -c200 -d30s --breakout --latency -s scripts/json.lua http://localhost 
 Running 30s test @ http://localhost
   2 threads and 200 connections
+  Thread Stats   Avg     Stdev       Max       Min   +/- Stdev
   Thread Stats   Avg      Stdev     Max   +/- Stdev
-    Latency     0.88ms  750.97us  21.61ms   71.06%
-    Connect    54.91us  112.79us   1.58ms   97.51%
-    TTFB        0.88ms  751.07us  21.60ms   71.06%
-    TTLB        0.93us    0.46us 786.00us   89.81%
-    Req/Sec   128.02k     7.83k  149.03k    84.33%
+    Latency     2.86ms    4.83ms  135.78ms   77.00us   89.93%
+    Connect     1.35ms  598.49us    2.39ms  325.00us   57.00%
+    TTFB        2.86ms    4.83ms  135.77ms   74.00us   89.93%
+    TTLB        2.08us    2.93us    1.37ms    1.00us   99.85%
+    Req/Sec    63.29k     2.06k    68.21k    51.87k    65.67%
   Latency Distribution
-     50%  687.00us
-     75%    1.27ms
-     90%    1.97ms
-     99%    2.99ms
-  7641549 requests in 30.00s, 29.24GB read
-Requests/sec: 254708.86
-Transfer/sec:      0.97GB
+  50.00%    1.22ms
+  75.00%    1.45ms
+  90.00%    7.75ms
+  95.00%   12.41ms
+  99.00%   23.91ms
+  99.99%   71.01ms
+  3777565 requests in 30.00s, 14.45GB read
+Requests/sec: 125908.95
+Transfer/sec:    493.27MB
 
 JSON Output
 -----------
 
 {
-        "requests": 7641549,
-        "duration_in_microseconds": 30001112.00,
-        "bytes": 31391407292,
-        "requests_per_sec": 254708.86,
-        "bytes_transfer_per_sec": 1046341458.68,
+        "requests": 3777565,
+        "duration_in_microseconds": 30002356.00,
+        "bytes": 15518237020,
+        "requests_per_sec": 125908.95,
+        "bytes_transfer_per_sec": 517233947.23,
         "latency_distribution": [
                 {
                         "percentile": 50,
-                        "latency_in_microseconds": 687
+                        "latency_in_microseconds": 1222
                 },
                 {
                         "percentile": 75,
-                        "latency_in_microseconds": 1273
+                        "latency_in_microseconds": 1447
                 },
                 {
                         "percentile": 90,
-                        "latency_in_microseconds": 1968
+                        "latency_in_microseconds": 7746
                 },
                 {
                         "percentile": 99,
-                        "latency_in_microseconds": 2993
+                        "latency_in_microseconds": 23913
                 },
                 {
                         "percentile": 99.999,
-                        "latency_in_microseconds": 12450
+                        "latency_in_microseconds": 124661
                 }
         ]
 }
