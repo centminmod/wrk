@@ -644,7 +644,7 @@ static int parse_args(struct config *cfg, char **url, struct http_parser_url *pa
 }
 
 static void print_stats_header() {
-    printf("  Thread Stats%6s%10s%10s%10s%12s\n", "Avg", "Stdev", "Max", "Min", "+/- Stdev");printf("  Thread Stats%6s%11s%8s%12s\n", "Avg", "Stdev", "Max", "+/- Stdev");
+    printf("  Thread Stats%6s%10s%10s%10s%12s\n", "Avg", "Stdev", "Max", "Min", "+/- Stdev");
 }
 
 static void print_units(long double n, char *(*fmt)(long double), int width) {

@@ -53,21 +53,22 @@ Usage: wrk <options> <url>
 
 ## Basic Usage
 
-    wrk -t12 -c400 -d30s http://127.0.0.1:8080/index.html
+    wrk-cmm -t8 -c400 -d30s http://127.0.0.1/index.html
 
-  This runs a benchmark for 30 seconds, using 12 threads, and keeping
+  This runs a benchmark for 30 seconds, using 8 threads, and keeping
   400 HTTP connections open.
 
   Output:
 
-    Running 30s test @ http://127.0.0.1:8080/index.html
-      12 threads and 400 connections
-      Thread Stats   Avg      Stdev     Max   +/- Stdev
-        Latency   635.91us    0.89ms  12.92ms   93.69%
-        Req/Sec    56.20k     8.07k   62.00k    86.54%
-      22464657 requests in 30.00s, 17.76GB read
-    Requests/sec: 748868.53
-    Transfer/sec:    606.33MB
+    Running 30s test @ http://127.0.0.1/index.html
+      8 threads and 400 connections
+      Thread Stats   Avg     Stdev       Max       Min   +/- Stdev
+        Latency     3.32ms    3.26ms  132.78ms   55.00us   98.55%
+        Req/Sec    15.73k     1.17k    28.82k     6.23k    84.17%
+      3760417 requests in 30.06s, 14.39GB read
+      Socket errors: connect 0, read 400, write 0, timeout 0
+    Requests/sec: 125116.00
+    Transfer/sec:    490.17MB
 
 ## Bind Source IP
 
